@@ -1,13 +1,13 @@
 const express = require("express");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const connectDB = require("./config/db_config");
-const color = require('colors')
-const path = require('path');
+const color = require("colors");
+const path = require("path");
 // const upload = multer({dest : "uploads/"})
 const { errorHandler } = require("./middleware/errorHandler");
 const app = express();
 const PORT = process.env.PORT || 8000;
-const cors = require('cors');
+const cors = require("cors");
 
 app.use(cors());
 
@@ -22,8 +22,6 @@ app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-
 // User Routes
 app.use("/api/user", require("./routes/userRoutes"));
 
@@ -31,21 +29,20 @@ app.use("/api/user", require("./routes/userRoutes"));
 
 // Document Routes
 app.use("/api/document", require("./routes/documentRoutes"));
-const __dirname1 = path.resolve()
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname1,"/FrontENd/dist")))
-  app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname1,"FrontENd","dist","index.html"))
-  })
-}else{
-  app.get("/", (req, res) => {
-  res.json({
-    msg: "WELCOME TO DOCUMENT API",
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/FrontENd/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname1, "FrontENd", "dist", "index.html"));
   });
-});
+} else {
+  app.get("/", (req, res) => {
+    res.json({
+      msg: "WELCOME TO DOCUMENT API",
+    });
+  });
 }
 
- 
 // Error Handler
 app.use(errorHandler);
 
