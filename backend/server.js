@@ -1,5 +1,6 @@
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
+require('dotenv').config()
 const express = require("express");
 const connectDB = require("./config/db_config");
 const color = require("colors");
