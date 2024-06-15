@@ -16,6 +16,12 @@ app.use(cors());
 // DB Connection
 connectDB();
 
+app.get("/", (req, res)=>{
+  res.json({
+    msg : "WELCOME TO THE DOCUMENT MANAGEMENT API"
+  })
+})
+
 // static file
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
@@ -31,19 +37,19 @@ app.use("/api/user", require("./routes/userRoutes"));
 
 // Document Routes
 app.use("/api/document", require("./routes/documentRoutes"));
-const __dirname1 = path.resolve();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname1, "/FrontENd/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname1, "FrontENd", "dist", "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.json({
-      msg: "WELCOME TO DOCUMENT API",
-    });
-  });
-}
+// const __dirname1 = path.resolve();
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname1, "/FrontENd/dist")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname1, "FrontENd", "dist", "index.html"));
+//   });
+// } else {
+//   app.get("/", (req, res) => {
+//     res.json({
+//       msg: "WELCOME TO DOCUMENT API",
+//     });
+//   });
+// }
 
 // Error Handler
 app.use(errorHandler);
